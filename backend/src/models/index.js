@@ -12,9 +12,9 @@ const db = {};
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
-// Import models
+
 db.Event = require('./event.model')(sequelize);
 
-// No associations needed
+
 
 module.exports = db;

@@ -134,7 +134,6 @@ const EventDetail: React.FC = () => {
         </Box>
       </Paper>
 
-      {/* Delete Confirmation Dialog */}
       <Dialog
         open={deleteDialogOpen}
         onClose={() => setDeleteDialogOpen(false)}
@@ -153,7 +152,7 @@ const EventDetail: React.FC = () => {
         </DialogActions>
       </Dialog>
 
-      {/* Image Preview Dialog */}
+
       <Dialog
         open={!!selectedImage}
         onClose={() => setSelectedImage(null)}
