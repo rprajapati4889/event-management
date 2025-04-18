@@ -9,7 +9,7 @@ const { Event } = require('../models');
 // Configure multer for image upload
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
-    const dir = 'uploads/';
+    const dir = path.join(__dirname, '../../uploads');
     if (!fs.existsSync(dir)) {
       fs.mkdirSync(dir, { recursive: true });
     }
@@ -35,7 +35,7 @@ const upload = multer({
 router.post('/', upload.array('images', 5), async (req, res) => {
   try {
     const { name, description, startDate, endDate, totalGuests } = req.body;
-    const imageUrls = req.files ? req.files.map(file => `/uploads/${file.filename}`) : [];
+    const imageUrls = req.files ? req.files.map(file => file.filename) : [];
 
     const event = await Event.create({
       name,

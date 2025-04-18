@@ -216,7 +216,7 @@ const formik = useFormik<EventFormValues>({
                   {previewUrls.map((url, index) => (
                     <img
                       key={index}
-                      src={url.startsWith('http') ? url : `http://localhost:5000/${url}`}
+                      src={url.startsWith('blob:') ? url : `http://localhost:5000/uploads/${url}`}
                       alt={`Preview ${index + 1}`}
                       style={{ width: 100, height: 100, objectFit: 'cover' }}
                     />

@@ -114,7 +114,7 @@ const EventList: React.FC = () => {
               <CardMedia
                 component="img"
                 height="200"
-                image={event.images[0] ? `http://localhost:5000/${event.images[0]}` : 'https://via.placeholder.com/400x200'}
+                image={event.images[0] ? `http://localhost:5000/uploads/${event.images[0]}` : 'https://via.placeholder.com/400x200'}
                 alt={event.name}
               />
               <CardContent sx={{ flexGrow: 1 }}>

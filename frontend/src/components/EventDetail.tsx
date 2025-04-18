@@ -78,7 +78,7 @@ const EventDetail: React.FC = () => {
                 onClick={() => setSelectedImage(image)}
               >
                 <img
-                  src={`http://localhost:5000/${image}`}
+                  src={`http://localhost:5000/uploads/${image}`}
                   alt={`Event ${index + 1}`}
                   loading="lazy"
                   style={{ height: '200px', width: '100%', objectFit: 'cover' }}
