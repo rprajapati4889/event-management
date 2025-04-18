@@ -1,31 +1,24 @@
 # Event Management System
 
-A full-stack application for managing events with CRUD operations and image uploads.
+A full-stack application for managing events with CRUD operations and image uploads. The system allows users to create, view, edit, and delete events with multiple image uploads.
 
-## Tech Stack
+## Project Overview
 
-### Backend
-- Node.js with Express
-- MySQL with Sequelize ORM
-- Multer for file uploads
+This project consists of two main parts:
+1. A React frontend with Material-UI
+2. A Node.js/Express backend with MySQL database
 
-### Frontend
-- React with TypeScript
-- Material-UI for components
-- Formik & Yup for form validation
-- React Router for routing
-- Axios for API calls
-
-## Setup Instructions
+## Quick Start
 
 ### Backend Setup
+
 1. Navigate to the backend directory:
    ```bash
    cd backend
    npm install
    ```
 
-2. Create a `.env` file in the backend directory with the following:
+2. Create `.env` file:
    ```
    PORT=5000
    DB_HOST=localhost
@@ -35,22 +28,32 @@ A full-stack application for managing events with CRUD operations and image uplo
    DB_PORT=3306
    ```
 
-3. Start the backend server:
+3. Set up the database:
+   ```bash
+   mysql -u root -p < setup_db.sql
+   ```
+
+4. Start the backend:
    ```bash
    npm start
    ```
 
 ### Frontend Setup
+
 1. Navigate to the frontend directory:
    ```bash
    cd frontend
    npm install
    ```
 
-2. Start the frontend development server:
+2. Start the frontend:
    ```bash
    npm start
    ```
+
+The application will be available at:
+- Frontend: http://localhost:3000
+- Backend API: http://localhost:5000
 
 ## Features
 
@@ -68,40 +71,46 @@ A full-stack application for managing events with CRUD operations and image uplo
    - Upload multiple images per event
    - View images in a grid layout
    - Image preview in modal
-   - Placeholder images for events without photos
+   - Automatic image cleanup on event deletion
 
-## API Endpoints
+## Tech Stack
 
-### Events
-- `GET /api/events` - Get all events with search, filter, and pagination
-- `GET /api/events/:id` - Get a specific event
-- `POST /api/events` - Create a new event
-- `PUT /api/events/:id` - Update an event
-- `DELETE /api/events/:id` - Delete an event
+### Frontend
+- React with TypeScript
+- Material-UI components
+- Formik & Yup for form validation
+- React Router for routing
+- Axios for API calls
 
-## Testing
+### Backend
+- Node.js with Express
+- MySQL with Sequelize ORM
+- Multer for file uploads
+- CORS enabled
+- Morgan for logging
 
-Use the provided Postman collection (`postman_collection.json`) to test all API endpoints.
-   npm run dev
-   ```
+## Project Structure
 
-### Frontend Setup
-1. Navigate to the frontend directory:
-   ```bash
-   cd frontend
-   npm install
-   ```
+```
+event-management/
+├── backend/           # Backend server code
+│   ├── src/          # Source files
+│   ├── uploads/      # Uploaded images
+│   └── README.md     # Backend documentation
+├── frontend/         # Frontend React app
+│   ├── src/         # Source files
+│   └── README.md    # Frontend documentation
+└── README.md        # Main documentation
+```
 
-2. Start the frontend development server:
-   ```bash
-   npm start
-   ```
+## Contributing
 
-## Features
-- User Authentication
-- Event CRUD Operations
-- Multiple Image Upload
-- Event Listing with Pagination
-- Sorting and Filtering
-- Search Functionality
-- Input Validation (Client & Server)
+1. Fork the repository
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a new Pull Request
+
+## License
+
+This project is licensed under the MIT License.
