@@ -6,7 +6,7 @@ const { Op } = require('sequelize');
 const { Event } = require('../models');
 
 
-// Configure multer for image upload
+
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
     const dir = path.join(__dirname, '../../uploads');
@@ -22,7 +22,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({
   storage,
-  limits: { fileSize: 5000000 }, // 5MB limit
+  limits: { fileSize: 5000000 },
   fileFilter: (req, file, cb) => {
     if (!file.originalname.match(/\.(jpg|jpeg|png)$/)) {
       return cb(new Error('Please upload an image'));
@@ -31,7 +31,7 @@ const upload = multer({
   }
 });
 
-// Create event
+
 router.post('/', upload.array('images', 5), async (req, res) => {
   try {
     const { name, description, startDate, endDate, totalGuests } = req.body;
@@ -52,7 +52,7 @@ router.post('/', upload.array('images', 5), async (req, res) => {
   }
 });
 
-// Get events with pagination, sorting, and filtering
+
 router.get('/', async (req, res) => {
   try {
     const {
@@ -98,7 +98,7 @@ router.get('/', async (req, res) => {
   }
 });
 
-// Get single event
+
 router.get('/:id', async (req, res) => {
   try {
     const event = await Event.findByPk(req.params.id);
@@ -113,7 +113,7 @@ router.get('/:id', async (req, res) => {
   }
 });
 
-// Update event
+
 router.put('/:id', upload.array('images', 5), async (req, res) => {
   try {
     const event = await Event.findByPk(req.params.id);
@@ -141,7 +141,7 @@ router.put('/:id', upload.array('images', 5), async (req, res) => {
   }
 });
 
-// Delete event
+
 router.delete('/:id', async (req, res) => {
   try {
     const event = await Event.findByPk(req.params.id);
@@ -150,17 +150,15 @@ router.delete('/:id', async (req, res) => {
       return res.status(404).json({ message: 'Event not found' });
     }
 
-    if (event.userId !== req.user.id) {
-      return res.status(403).json({ message: 'Not authorized' });
-    }
 
-    // Delete associated images
-    event.images.forEach(image => {
-      const filePath = path.join(__dirname, '..', '..', image);
-      if (fs.existsSync(filePath)) {
-        fs.unlinkSync(filePath);
-      }
-    });
+    if (event.images && Array.isArray(event.images)) {
+      event.images.forEach(image => {
+        const filePath = path.join(__dirname, '../../uploads', image);
+        if (fs.existsSync(filePath)) {
+          fs.unlinkSync(filePath);
+        }
+      });
+    }
 
     await event.destroy();
     res.json({ message: 'Event deleted' });
